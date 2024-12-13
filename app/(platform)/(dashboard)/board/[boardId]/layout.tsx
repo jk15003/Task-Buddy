@@ -6,7 +6,9 @@ import { ReactNode } from "react";
 
 interface LayoutProps {
   children: ReactNode;
-  params: { boardId: string };
+  params: {
+    boardId: string;
+  };
 }
 
 async function getOrgId() {
@@ -14,7 +16,11 @@ async function getOrgId() {
   return orgId;
 }
 
-export async function generateMetadata({ params }: LayoutProps) {
+export async function generateMetadata({
+  params
+}: {
+  params: { boardId: string }
+}) {
   const { boardId } = params;
   const orgId = await getOrgId();
 
@@ -23,6 +29,7 @@ export async function generateMetadata({ params }: LayoutProps) {
       title: "Board",
     };
   }
+
   const board = await db.board.findUnique({
     where: {
       id: boardId,
@@ -35,8 +42,13 @@ export async function generateMetadata({ params }: LayoutProps) {
   };
 }
 
-// Change this line - remove "BoardIdLayout" name
-export default async function Layout({ children, params }: LayoutProps) {
+export default async function Layout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: { boardId: string };
+}) {
   const { boardId } = params;
   const orgId = await getOrgId();
 
