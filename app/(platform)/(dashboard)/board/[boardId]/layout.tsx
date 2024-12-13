@@ -13,7 +13,7 @@ interface LayoutProps {
 
 // Utility function to get orgId
 async function getOrgId() {
-  const { orgId } = await auth();
+  const { orgId } =await auth();
   return orgId;
 }
 
