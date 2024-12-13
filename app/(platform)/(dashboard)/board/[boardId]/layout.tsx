@@ -6,18 +6,16 @@ import { ReactNode } from "react";
 
 interface LayoutProps {
   children: ReactNode;
-  params: {
-    boardId: string;
-  };
+  params: Promise<{ boardId: string }>;
 }
 
-// Utility function to get orgId
 async function getOrgId() {
   const { orgId } =await auth();
   return orgId;
 }
 
 export async function generateMetadata({ params }: LayoutProps) {
+  const { boardId } = await params;
   const orgId = await getOrgId();
 
   if (!orgId) {
@@ -27,7 +25,7 @@ export async function generateMetadata({ params }: LayoutProps) {
   }
   const board = await db.board.findUnique({
     where: {
-      id: params.boardId,
+      id: boardId,
       orgId,
     },
   });
@@ -38,6 +36,7 @@ export async function generateMetadata({ params }: LayoutProps) {
 }
 
 const BoardIdLayout = async ({ children, params }: LayoutProps) => {
+  const { boardId } = await params;
   const orgId = await getOrgId();
 
   if (!orgId) {
@@ -46,7 +45,7 @@ const BoardIdLayout = async ({ children, params }: LayoutProps) => {
 
   const board = await db.board.findFirst({
     where: {
-      id: params.boardId,
+      id: boardId,
       orgId,
     },
   });
@@ -67,3 +66,4 @@ const BoardIdLayout = async ({ children, params }: LayoutProps) => {
 };
 
 export default BoardIdLayout;
+export { BoardIdLayout };
