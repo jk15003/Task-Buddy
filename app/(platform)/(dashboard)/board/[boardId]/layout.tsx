@@ -3,11 +3,13 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { BoardNavBar } from "./_components/board-navbar";
 
+interface LayoutParams {
+    params: { boardId: string };
+}
+
 export async function generateMetadata({
     params,
-}: {
-    params: { boardId: string }
-}) {
+}: LayoutParams): Promise<{ title: string }> {
     const { orgId } = await auth();
     const boardId = params.boardId;
 
@@ -21,11 +23,11 @@ export async function generateMetadata({
         where: {
             id: boardId,
             orgId,
-        }
+        },
     });
 
     return {
-        title: board?.title || "Board"
+        title: board?.title || "Board",
     };
 }
 
@@ -34,7 +36,7 @@ export default async function BoardIdLayout({
     params,
 }: {
     children: React.ReactNode;
-    params: { boardId: string };
+    params: LayoutParams["params"];
 }) {
     const { orgId } = await auth();
     const boardId = params.boardId;
@@ -47,7 +49,7 @@ export default async function BoardIdLayout({
         where: {
             id: boardId,
             orgId,
-        }
+        },
     });
 
     if (!board) {
@@ -61,9 +63,7 @@ export default async function BoardIdLayout({
         >
             <BoardNavBar data={board} />
             <div className="absolute inset-0 bg-black/10" />
-            <main className="relative pt-28 h-full">
-                {children}
-            </main>
+            <main className="relative pt-28 h-full">{children}</main>
         </div>
     );
 }
