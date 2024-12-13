@@ -50,9 +50,6 @@ export const CardModal=()=>{
                             :   
                             <>
                                 <Activity items={auditLogsData}/>
-                                <p className="hidden last:block text-xs text-center text-muted-foreground">
-                                    No activity found in this list!
-                                </p>
                             </>
                         }
                     </div>
