@@ -3,20 +3,13 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { BoardNavBar } from "./_components/board-navbar";
 
-interface LayoutProps {
-    children: React.ReactNode;
-    params: {
-        boardId: string;
-    };
-}
-
 export async function generateMetadata({
     params,
 }: {
     params: { boardId: string }
 }) {
     const { orgId } = await auth();
-    const boardId = params.boardId; // Remove await
+    const boardId = params.boardId;
 
     if (!orgId) {
         return {
@@ -36,12 +29,15 @@ export async function generateMetadata({
     };
 }
 
-const BoardIdLayout = async ({
+export default async function BoardIdLayout({
     children,
     params,
-}: LayoutProps) => {
+}: {
+    children: React.ReactNode;
+    params: { boardId: string };
+}) {
     const { orgId } = await auth();
-    const boardId = params.boardId; // Remove await
+    const boardId = params.boardId;
 
     if (!orgId) {
         redirect("/select-org");
@@ -70,6 +66,4 @@ const BoardIdLayout = async ({
             </main>
         </div>
     );
-};
-
-export default BoardIdLayout;
+}
