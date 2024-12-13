@@ -4,13 +4,6 @@ import { notFound, redirect } from "next/navigation";
 import { BoardNavBar } from "./_components/board-navbar";
 import { ReactNode } from "react";
 
-interface LayoutProps {
-  children: ReactNode;
-  params: {
-    boardId: string;
-  };
-}
-
 async function getOrgId() {
   const { orgId } = await auth();
   return orgId;
