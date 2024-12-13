@@ -1,7 +1,5 @@
 import { ChatBot } from "./_components/ai-chat-bot";
 
-export const runtime="edge";
-
 const ChatBoxpage=()=>{
     return(
         <>

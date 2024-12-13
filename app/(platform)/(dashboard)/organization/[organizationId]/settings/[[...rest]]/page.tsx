@@ -1,6 +1,5 @@
 import { OrganizationProfile } from "@clerk/nextjs";
 
-export const runtime="edge";
 
 const SettingsPage=()=> {
     return (

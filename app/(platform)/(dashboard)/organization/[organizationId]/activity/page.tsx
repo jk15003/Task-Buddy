@@ -3,8 +3,6 @@ import { Info } from "../_components/info";
 import { ActivityList } from "./_components/activity-list";
 import { Suspense } from "react";
 
-export const runtime="edge";
-
 const ActivityPage=()=>{
     return(
         <div className="w-full">

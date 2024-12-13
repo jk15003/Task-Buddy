@@ -3,8 +3,6 @@ import { Info } from "./_components/info";
 import { BoardList } from "./_components/board-list";
 import { Suspense } from "react";
 
-export const runtime="edge";
-
 const OrganizatioIdPage = async () => {
     return (
         <div className="w-full mb-20">
