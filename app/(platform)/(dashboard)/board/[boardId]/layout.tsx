@@ -6,16 +6,16 @@ import { ReactNode } from "react";
 
 interface LayoutProps {
   children: ReactNode;
-  params: Promise<{ boardId: string }>;
+  params: { boardId: string };
 }
 
 async function getOrgId() {
-  const { orgId } =await auth();
+  const { orgId } = await auth();
   return orgId;
 }
 
 export async function generateMetadata({ params }: LayoutProps) {
-  const { boardId } = await params;
+  const { boardId } = params;
   const orgId = await getOrgId();
 
   if (!orgId) {
@@ -35,8 +35,9 @@ export async function generateMetadata({ params }: LayoutProps) {
   };
 }
 
-const BoardIdLayout = async ({ children, params }: LayoutProps) => {
-  const { boardId } = await params;
+// Change this line - remove "BoardIdLayout" name
+export default async function Layout({ children, params }: LayoutProps) {
+  const { boardId } = params;
   const orgId = await getOrgId();
 
   if (!orgId) {
@@ -63,7 +64,4 @@ const BoardIdLayout = async ({ children, params }: LayoutProps) => {
       <main className="relative pt-28 h-full">{children}</main>
     </div>
   );
-};
-
-export default BoardIdLayout;
-export { BoardIdLayout };
+}
