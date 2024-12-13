@@ -9,6 +9,25 @@ import Image from "next/image";
 import { defaultImages } from "@/constants/images";
 import Link from "next/link";
 
+interface UnsplashImage {
+    id: string;
+    urls: {
+        thumb: string;
+        full: string;
+    };
+    links: {
+        html: string;
+    };
+    user: {
+        name: string;
+    };
+}
+
+interface UnsplashResponse {
+    response?: UnsplashImage[];
+    errors?: string[];
+}
+
 interface FormPickerProps {
     id: string;
     errors?: Record<string, string[] | undefined>;
@@ -20,28 +39,24 @@ export const FormPicker = ({
 }: FormPickerProps) => {
     const { pending } = useFormStatus();
 
-    const [images, setImages] = useState<Array<Record<string, any>>>([]);
+    const [images, setImages] = useState<UnsplashImage[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                throw new Error("test");
                 const result = await unsplash.photos.getRandom({
                     collectionIds: ["1065396"],
                     count: 9,
-                });
+                }) as UnsplashResponse;
 
                 if (result && result.response) {
-                    const newImages = (result.response as Array<Record<string, any>>);
-                    setImages(newImages);
+                    setImages(result.response);
                 } else {
                     console.error("Failed to get images from Unsplash");
                 }
-
-            } catch (error) {
-                console.log(error);
+            } catch {
                 setImages(defaultImages);
             } finally {
                 setIsLoading(false);
@@ -88,19 +103,27 @@ export const FormPicker = ({
                             alt="Unsplash Image"
                             className="object-cover rounded-sm"
                             fill
-                            />
-                        {selectedImageId===image.id && (
-                            <div className="absolute inset-y-0 y-full w-full bh-black/30 flex items-center justify-center">
+                        />
+                        {selectedImageId === image.id && (
+                            <div className="absolute inset-y-0 h-full w-full bg-black/30 flex items-center justify-center">
                                 <Check className="h-4 w-4 text-white"/>
                             </div>
-                        )};
-                        <Link href={image.links.html} target="_blank" 
-                        className="opacity-0 group-hover:opacity-100 absolute inset-x-0 bottom-0 text-xs truncate text-white hover:underline py-1 px-2 bg-black/60 transition-opacity duration-200">
+                        )}
+                        <Link 
+                            href={image.links.html} 
+                            target="_blank" 
+                            className="opacity-0 group-hover:opacity-100 absolute inset-x-0 bottom-0 text-xs truncate text-white hover:underline py-1 px-2 bg-black/60 transition-opacity duration-200"
+                        >
                             {image.user.name}
                         </Link>
                     </div>
                 ))}
             </div>
+            {errors?.[id] && (
+                <div className="text-rose-500 text-sm mt-2">
+                    {errors[id]?.join(", ")}
+                </div>
+            )}
         </div>
     );
 };

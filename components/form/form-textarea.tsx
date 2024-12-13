@@ -29,7 +29,6 @@ export const FormTextarea=forwardRef<HTMLTextAreaElement,FormTextareaProps>(({
     disabled,
     errors,
     className,
-    onBlur,
     onClick,
     onKeyDown,
     defaultValue

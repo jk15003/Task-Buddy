@@ -18,8 +18,10 @@ interface SidebarProps{
 export const Sidebar=({
     storageKey="t-sidebar-state",
 }:SidebarProps)=>{
-    const[expanded,setExpanded]=useLocalStorage<Record<string,any>>(storageKey,{});
-
+    const [expanded, setExpanded] = useLocalStorage<Record<string, boolean>>(
+        storageKey,
+        {}
+    );
     const {
         organization:activeOrganization,
         isLoaded:isLoadedOrg

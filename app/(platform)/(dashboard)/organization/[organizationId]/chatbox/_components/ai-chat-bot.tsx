@@ -37,7 +37,7 @@ export function ChatBot() {
         try {
             await navigator.clipboard.writeText(text);
             toast.success("Message copied to clipboard!");
-        } catch (err) {
+        } catch {
             toast.error("Failed to copy message");
         }
     };

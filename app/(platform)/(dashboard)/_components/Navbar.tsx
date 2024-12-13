@@ -1,4 +1,4 @@
-import { AlignCenter, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";

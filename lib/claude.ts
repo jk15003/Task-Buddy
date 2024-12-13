@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { ChatConfiguration } from '@/app/api/chat/types';
 
-const anthropic = new Anthropic({
+export const anthropic = new Anthropic({
     apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
@@ -14,8 +14,18 @@ export const defaultConfig: ChatConfiguration = {
 export const systemPrompt = `You are Friend, a witty and knowledgeable chatbot of Task-Buddy the best task and project manager website. 
 Your responses should be informative yet entertaining and serious, occasionally incorporating references to the series.`;
 
-export async function formatMessages(messages: any[]) {
-    return messages.map(({ role, content }: { role: string, content: string }) => ({
+interface ChatMessage {
+    role: string;
+    content: string;
+}
+
+interface FormattedMessage {
+    role: "user" | "assistant";
+    content: string;
+}
+
+export async function formatMessages(messages: ChatMessage[]): Promise<FormattedMessage[]> {
+    return messages.map(({ role, content }) => ({
         role: role === "user" ? "user" : "assistant",
         content: content
     }));
