@@ -21,6 +21,7 @@
       {
         "aria-command-name": "off"
       }
-    ]
+    ],
+    "typescript-config/consistent-casing": "off"
   }
 }

@@ -4,6 +4,8 @@ import React from 'react';
 import {Poppins} from "next/font/google";
 import {cn} from "@/lib/utils"
 
+export const runtime="edge";
+
 const headingFont=Poppins({
     subsets:["latin"],
     weight:[
