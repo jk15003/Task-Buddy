@@ -112,7 +112,7 @@ export const FormPicker = ({
                         <Link 
                             href={image.links.html} 
                             target="_blank" 
-                            className="hidden md:block lg:hidden opacity-0 group-hover:opacity-100 absolute inset-x-0 bottom-0 text-xs truncate text-white hover:underline py-1 px-2 bg-black/60 transition-opacity duration-200"
+                            className="hidden md:block opacity-0 group-hover:opacity-100 absolute inset-x-0 bottom-0 text-xs truncate text-white hover:underline py-1 px-2 bg-black/60 transition-opacity duration-200"
                         >
                             {image.user.name}
                         </Link>

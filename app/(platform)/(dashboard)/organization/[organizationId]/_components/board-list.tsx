@@ -49,6 +49,7 @@ export const BoardList = async () => {
                     </Link>
                 ))}
                 
+                <div className="md:hidden">
                 <FormPopover sideOffset={10} >
                     <div 
                         role="button" 
@@ -75,6 +76,35 @@ export const BoardList = async () => {
                         </Hint>
                     </div>
                 </FormPopover>
+                </div>
+                <div className="hidden md:block">
+                <FormPopover sideOffset={10} side="right">
+                    <div 
+                        role="button" 
+                        className="aspect-video relative h-full w-full 
+                        bg-neutral-100 hover:bg-neutral-200
+                        rounded-lg border-2 border-dashed border-neutral-300
+                        flex flex-col gap-y-1 items-center justify-center
+                        transition-colors duration-200 group
+                        hover:shadow-sm"
+                    >
+                        <p className="text-sm font-medium text-neutral-600 group-hover:text-neutral-700">
+                            Create new board
+                        </p>
+
+                        <Hint
+                            sideOffset={40}
+                            description="Free WorkSpaces. Hopefully you are enjoying our product :))."
+                        >
+                            <HelpCircle 
+                                className="absolute bottom-2 right-2 h-4 w-4 
+                                text-neutral-400 group-hover:text-neutral-500
+                                transition-colors"
+                            />
+                        </Hint>
+                    </div>
+                </FormPopover>
+                </div>
             </div>
         </div>
     );
