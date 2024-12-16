@@ -49,7 +49,7 @@ export const BoardList = async () => {
                     </Link>
                 ))}
                 
-                <FormPopover sideOffset={10} side="right">
+                <FormPopover sideOffset={10} >
                     <div 
                         role="button" 
                         className="aspect-video relative h-full w-full 

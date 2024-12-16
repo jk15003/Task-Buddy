@@ -40,8 +40,21 @@ export const MobileSidebar=()=> {
             <Sheet open={isOpen} onOpenChange={onClose}>
                 <SheetContent side="left" className="p-2 pt-10">
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                    <Sidebar
-                    storageKey="t-sidebar-mobile-state"/>
+                <div className="h-[calc(100vh-40px)] overflow-y-auto 
+                        scrollbar-thin 
+                        scrollbar-thumb-slate-300 
+                        dark:scrollbar-thumb-slate-700 
+                        scrollbar-thumb-rounded-full
+                        hover:scrollbar-thumb-slate-400
+                        dark:hover:scrollbar-thumb-slate-600
+                        scrollbar-track-slate-100 
+                        dark:scrollbar-track-slate-800
+                        scrollbar-track-rounded-full
+                        pr-2
+                        transition-all">
+                        <Sidebar
+                            storageKey="t-sidebar-mobile-state"/>
+                    </div>
                 </SheetContent>
             </Sheet>
         </>
